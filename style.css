@@ -1,8 +1,16 @@
 .worldDiv {
     display: grid;
+    grid-template-columns: repeat(10, auto);
+    justify-content: center;
+    gap: 2px;
 }
 
 .area {
-	width: 50px;
+    width: 50px;
+    height: 50px;
+    background-color: black;
 }
 
+.snake {
+    background-color: green !important;
+}

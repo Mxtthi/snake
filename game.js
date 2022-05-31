@@ -21,6 +21,7 @@ class Game {
 	loadWorld() {
 		let div = document.createElement("div");
 		div.classList.add("worldDiv");
+		div.style.gridTemplateColumns = `repeat(${worldSize}, auto)`;
 		document.body.appendChild(div);
 
 		for (let y = 0; y < worldSize; y++) {
@@ -51,7 +52,7 @@ class Game {
 		for (let i = 0; i < game.snake.parts.length; i++) {
 			const element = game.snake.parts[i];
 			console.log(element);
-			if (game.checkIfOutside(element.x) || game.checkIfOutside(element.x)) {
+			if (game.checkIfOutside(element.x) || game.checkIfOutside(element.y)) {
 				game.running = false;
 			} else {
 				document.getElementsByClassName(`x${element.x} y${element.y}`)[0].classList.add("snake");

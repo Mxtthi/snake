@@ -4,7 +4,11 @@ class Snake {
         this.length = 1;
         this.direction = "unset";
         this.parts = [];
-        this.addPart(worldSize / 2, worldSize / 2, "start");
+
+        let pos = Math.floor(worldSize / 2)
+        this.addPart(pos, pos, "start");
+        this.addPart(pos + 1, pos, "start");
+        this.addPart(pos + 2, pos, "start");
     }
 
     addPart(x, y, pos) {
@@ -31,13 +35,8 @@ class Snake {
                 case "right":
                     part = new Part(game.snake.parts[0].x + 1, game.snake.parts[0].y, "start")
                     break;
-                default:
-                    console.log("direction not found");
-                    break;
             }
-            console.log(game.snake.parts);
             game.snake.parts.unshift(part);
-            console.log(game.snake.parts);
             game.snake.parts.pop();
         }
     }

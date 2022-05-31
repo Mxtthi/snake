@@ -1,6 +1,6 @@
 # snake
 Snake browsergame
 
-- move
 - spawn items
 - make longer
+- implement game settings into object

@@ -6,7 +6,7 @@ window.onload = function () {
 
 class Game {
 	constructor() {
-
+		this.running = true;
 		this.createGame();
 	}
 
@@ -31,8 +31,6 @@ class Game {
 				document.getElementsByClassName("worldDiv")[0].appendChild(div);
 
 			}
-
-
 		}
 	}
 
@@ -41,6 +39,7 @@ class Game {
 	}
 
 	updateSnake() {
+		if (game == "") game = this;
 
 		for (let y = 0; y < worldSize; y++) {
 			for (let x = 0; x < worldSize; x++) {
@@ -49,18 +48,28 @@ class Game {
 			}
 		}
 
-		for (let i = 0; i < this.snake.parts.length; i++) {
-			const element = this.snake.parts[i];
-
+		for (let i = 0; i < game.snake.parts.length; i++) {
+			const element = game.snake.parts[i];
 			console.log(element);
-			document.getElementsByClassName(`x${element.x} y${element.y}`)[0].classList.add("snake");
-
-
+			if (game.checkIfOutside(element.x) || game.checkIfOutside(element.x)) {
+				game.running = false;
+			} else {
+				document.getElementsByClassName(`x${element.x} y${element.y}`)[0].classList.add("snake");
+			}
 		}
 
-		this.movementInterval = setInterval(this.snake.move, speed)
-
+		if (game.updateInterval == undefined || game.movementInterval == undefined) {
+			game.updateInterval = setInterval(game.updateSnake, 100)
+			game.movementInterval = setInterval(game.snake.move, speed)
+		} else if (game.running == false) {
+			clearInterval(game.updateInterval);
+			clearInterval(game.movementInterval);
+		}
 	}
 
+	checkIfOutside(int) {
+		if (int < 0 || int >= worldSize) return true;
+		return false;
+	}
 }
 

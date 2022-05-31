@@ -17,10 +17,6 @@
 </head>
 
 <body>
-
-    <h1>In Arbeit</h1>
-
-
 </body>
 
 </html>

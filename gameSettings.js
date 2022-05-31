@@ -1,4 +1,4 @@
-let worldSize = 15,
+let worldSize = 20,
     areaSize = 50,
-    speed = 100,
+    speed = 200,
     game = "";

@@ -4,7 +4,7 @@ body {
 
 .worldDiv {
     display: grid;
-    border: solid 4px black;
+    border: solid 5px black;
     position: absolute;
     left: 50%;
     top: 50%;

@@ -15,6 +15,7 @@ class Game {
 		if (document.getElementsByClassName("worldDiv")[0] == undefined) this.loadWorld();
 		this.createSnake();
 		this.updateSnake();
+		this.startAudio();
 	}
 
 	loadWorld() {
@@ -104,5 +105,14 @@ class Game {
 
 	gameOver() {
 		alert("Game over");
+	}
+
+	startAudio() {
+		this.audio = new Audio('./other/song.mp3');
+		this.audio.play();
+	}
+
+	pauseAudio() {
+		this.audio.pause();
 	}
 }

@@ -7,6 +7,7 @@ window.onload = function () {
 class Game {
 	constructor() {
 		this.running = true;
+		this.score = 0;
 		this.items = [];
 		this.createGame();
 	}
@@ -78,6 +79,7 @@ class Game {
 			}
 
 			if (element.x == game.items[0].x && element.y == game.items[0].y) {
+				game.score++;
 				game.snake.extendSnake();
 				game.createItem();
 			}
@@ -105,6 +107,10 @@ class Game {
 
 	gameOver() {
 		alert("Game over");
+		if (this.score > 0) {
+			let data = { "highscore": this.score };
+			this.sendData(data);
+		}
 	}
 
 	startAudio() {
@@ -114,5 +120,14 @@ class Game {
 
 	pauseAudio() {
 		this.audio.pause();
+	}
+
+	sendData(dataToBeSent) {
+		$("#result").innerHTML = "";
+		$.post("db.php", dataToBeSent, function (data) {
+			// Display the returned data in browser
+
+			$("#result").html(data);
+		});
 	}
 }

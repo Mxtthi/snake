@@ -3,4 +3,4 @@ Snake browsergame
 
 - implement game settings into object
 - make "update method prettier"
-- scoreboard, login etc
+- adding behind still not working properly

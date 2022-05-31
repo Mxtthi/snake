@@ -53,12 +53,14 @@ class Snake {
             } else {
                 pos.y += 1
             }
+            console.log(pos.x, pos.y)
             if (game.checkIfOutside(pos.x) || game.checkIfOutside(pos.y)) {
                 if (yDiff != 0) {
                     pos.x -= 2;
                 } else {
                     pos.y -= 2;
                 }
+                console.log(pos.x, pos.y)
             }
         }
         this.addPart(pos.x, pos.y, "normal");

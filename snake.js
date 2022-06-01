@@ -38,6 +38,18 @@ class Snake {
             game.snake.parts.pop();
         }
     }
+	
+	checkIfUsed(x, y) {
+		for (let i = 0; i < game.snake.parts.length; i++) {
+			const element = game.snake.parts[i];
+			if (element.x == x && element.y == y) {
+				console.log("already used")
+				console.log(game.snake.parts[i])
+				return true;
+			}
+		}
+		return false;
+	}
 
     extendSnake() {
         let parts = this.parts,
@@ -75,27 +87,35 @@ class Snake {
                 game = new Game();
                 break;
             case "w":
+				if (game.snake.checkIfUsed(game.snake.parts[0].x, game.snake.parts[0].y - 1))return;
                 game.snake.direction = "up";
                 break;
             case "arrowup":
+				if (game.snake.checkIfUsed(game.snake.parts[0].x, game.snake.parts[0].y - 1))return;
                 game.snake.direction = "up";
                 break;
             case "s":
+				if (game.snake.checkIfUsed(game.snake.parts[0].x, game.snake.parts[0].y + 1))return;
                 game.snake.direction = "down";
                 break;
             case "arrowdown":
+				if (game.snake.checkIfUsed(game.snake.parts[0].x, game.snake.parts[0].y + 1))return;
                 game.snake.direction = "down";
                 break;
             case "a":
+				if (game.snake.checkIfUsed(game.snake.parts[0].x - 1, game.snake.parts[0].y))return;
                 game.snake.direction = "left";
                 break;
             case "arrowleft":
+				if (game.snake.checkIfUsed(game.snake.parts[0].x - 1, game.snake.parts[0].y))return;
                 game.snake.direction = "left";
                 break;
             case "d":
+				if (game.snake.checkIfUsed(game.snake.parts[0].x + 1, game.snake.parts[0].y))return;
                 game.snake.direction = "right";
                 break;
             case "arrowright":
+				if (game.snake.checkIfUsed(game.snake.parts[0].x + 1, game.snake.parts[0].y))return;
                 game.snake.direction = "right";
                 break;
         }

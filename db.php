@@ -41,7 +41,6 @@ for ($i = 0; $i < count($data); $i++) {
 }
 
 echo "<p>TOP 10 DAILY:</p>";
-echo $month . " " . $day;
 $count = 0;
 $arr = [];
 for ($i = 0; $i < count($data); $i++) {

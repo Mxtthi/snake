@@ -80,6 +80,7 @@ class Game {
 
 			if (element.x == game.items[0].x && element.y == game.items[0].y) {
 				game.score++;
+				document.getElementById("highscore").innerHTML = "Punkte: " + game.score;
 				game.snake.extendSnake();
 				game.createItem();
 			}

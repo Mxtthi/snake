@@ -18,6 +18,10 @@
 </head>
 
 <body>
+	
+	<div>
+		<p id="highscore">Punkte: 0</p>
+	</div>
 
     <?php
 

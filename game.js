@@ -87,7 +87,7 @@ class Game {
 		}
 
 		if (game.updateInterval == undefined || game.movementInterval == undefined) {
-			game.updateInterval = setInterval(game.updateSnake, 10)
+			game.updateInterval = setInterval(game.updateSnake, 5)
 			game.movementInterval = setInterval(game.snake.move, speed)
 		} else if (game.running == false) {
 			clearInterval(game.updateInterval);
@@ -98,8 +98,11 @@ class Game {
 	}
 
 	checkIfOutside(int) {
-		if (int < 0 || int >= worldSize) return true;
-		return false;
+		if (int < 0 || int >= worldSize) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	getRandomInt(min, max) {

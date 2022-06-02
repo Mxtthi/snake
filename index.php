@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2022 Project</title>
+    <title>Snake</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="style.css">
@@ -18,10 +18,10 @@
 </head>
 
 <body>
-	
-	<div>
-		<p id="highscore">Punkte: 0</p>
-	</div>
+
+    <div>
+        <p id="highscore">Punkte: 0</p>
+    </div>
 
     <?php
 

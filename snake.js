@@ -59,10 +59,6 @@ class Snake {
         pos.x = parts[parts.length - 1].x + xDiff;
         pos.y = parts[parts.length - 1].y + yDiff;
 
-
-
-        console.log(pos.x, pos.y)
-
         do {
             if (count > 1) {
                 pos.x = parts[parts.length - 1].x;
@@ -97,12 +93,17 @@ class Snake {
     }
 
     changeDirection(e) {
+        console.log(e.key)
         switch (e.key.toLowerCase()) {
             case "tab":
                 e.preventDefault();
                 clearInterval(game.updateInterval);
                 clearInterval(game.movementInterval);
                 game = new Game();
+                break;
+            case " ":
+                e.preventDefault();
+                game.pauseGame();
                 break;
             case "w":
                 if (game.snake.checkIfUsed(game.snake.parts[0].x, game.snake.parts[0].y - 1)) return;

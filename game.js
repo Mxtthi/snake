@@ -7,6 +7,7 @@ window.onload = function () {
 class Game {
 	constructor() {
 		this.running = true;
+		this.isPaused = false;
 		this.score = 0;
 		this.items = [];
 		this.createGame();
@@ -114,6 +115,18 @@ class Game {
 		if (this.score > 0) {
 			let data = { "highscore": this.score };
 			this.sendData(data);
+		}
+	}
+
+	pauseGame() {
+		this.isPaused = !this.isPaused;
+		console.log(this.isPaused)
+		if (this.isPaused) {
+			clearInterval(game.updateInterval);
+			clearInterval(game.movementInterval);
+		} else {
+			game.updateInterval = setInterval(game.updateSnake, 5)
+			game.movementInterval = setInterval(game.snake.move, speed)
 		}
 	}
 

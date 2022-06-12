@@ -22,6 +22,7 @@
     <div>
         <p id="highscore">Punkte: 0</p>
     </div>
+    <p id="gamestatus" class="unselectable centered"></p>
 
     <?php
 
@@ -89,8 +90,6 @@
         }
     }
     echo "</div>";
-
-
     ?>
 
 </body>

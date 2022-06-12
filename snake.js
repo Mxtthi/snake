@@ -1,5 +1,5 @@
 class Snake {
-    constructor() {
+    constructor(worldSize) {
 
         this.length = 1;
         this.direction = "unset";
@@ -43,8 +43,6 @@ class Snake {
         for (let i = 0; i < game.snake.parts.length; i++) {
             const element = game.snake.parts[i];
             if (element.x == x && element.y == y) {
-                console.log("already used")
-                console.log(game.snake.parts[i])
                 return true;
             }
         }
@@ -81,8 +79,8 @@ class Snake {
 
             if (pos.x < 0) pos.x++;
             if (pos.y < 0) pos.x++;
-            if (pos.x >= worldSize) pos.x--;
-            if (pos.y >= worldSize) pos.y--;
+            if (pos.x >= game.worldSize) pos.x--;
+            if (pos.y >= game.worldSize) pos.y--;
 
             count++;
             if (count > 5) return;
@@ -93,13 +91,10 @@ class Snake {
     }
 
     changeDirection(e) {
-        console.log(e.key)
         switch (e.key.toLowerCase()) {
             case "tab":
                 e.preventDefault();
-                clearInterval(game.updateInterval);
-                clearInterval(game.movementInterval);
-                game = new Game();
+                game.restartGame();
                 break;
             case " ":
                 e.preventDefault();

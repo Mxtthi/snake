@@ -1,11 +1,13 @@
+let game = "";
 window.onload = function () {
-	console.log('Dokument geladen');
 	game = new Game();
 	document.addEventListener("keydown", game.snake.changeDirection, false);
 }
 
 class Game {
 	constructor() {
+		this.worldSize = 20;
+		this.speed = 200;
 		this.running = true;
 		this.isPaused = false;
 		this.score = 0;
@@ -23,11 +25,11 @@ class Game {
 	loadWorld() {
 		let div = document.createElement("div");
 		div.classList.add("worldDiv");
-		div.style.gridTemplateColumns = `repeat(${worldSize}, auto)`;
+		div.style.gridTemplateColumns = `repeat(${this.worldSize}, auto)`;
 		document.body.appendChild(div);
 
-		for (let y = 0; y < worldSize; y++) {
-			for (let x = 0; x < worldSize; x++) {
+		for (let y = 0; y < this.worldSize; y++) {
+			for (let x = 0; x < this.worldSize; x++) {
 				div = document.createElement("div");
 				div.classList.add("area", `x${x}`, `y${y}`);
 				document.getElementsByClassName("worldDiv")[0].appendChild(div);
@@ -35,40 +37,66 @@ class Game {
 		}
 	}
 
+	restartGame() {
+		game.running = true;
+		clearInterval(game.updateInterval);
+    	clearInterval(game.movementInterval);
+		game.updateInterval = ""; game.movementInterval = "", document.getElementById("gamestatus").innerHTML = "";
+		this.score = 0, this.items = [];
+		if (game.isPaused) game.pauseGame();
+		game.createSnake();
+		game.updateSnake();
+	}
+
 	createSnake() {
-		this.snake = new Snake();
+		this.snake = new Snake(this.worldSize);
 	}
 
 	createItem() {
-		let newItem = new Part(this.getRandomInt(0, worldSize - 1), this.getRandomInt(0, worldSize - 1), "item");
+		let newItem = new Part(this.getRandomInt(0, game.worldSize - 1), this.getRandomInt(0, game.worldSize - 1), "item");
 		this.items[0] = newItem;
-		console.log(game.items)
 	}
 
 	updateSnake() {
 		if (game == "") game = this;
 		if (game.items.length == 0) game.createItem();
 
-		for (let y = 0; y < worldSize; y++) {
-			for (let x = 0; x < worldSize; x++) {
+		game.clearWorld();
+		game.loadItem();
+		game.loadSnake();
 
+		if (game.updateInterval == undefined || game.updateInterval == "") game.updateInterval = setInterval(game.updateSnake, 15);
+		if (game.movementInterval == undefined || game.movementInterval == "") game.movementInterval = setInterval(game.snake.move, game.speed);
+		if (game.running == false) {
+			clearInterval(game.updateInterval);
+			clearInterval(game.movementInterval);
+		}
+		if (!(game.running)) game.gameOver();
+	}
+
+	clearWorld() {
+		for (let y = 0; y < game.worldSize; y++) {
+			for (let x = 0; x < game.worldSize; x++) {
 				document.getElementsByClassName(`x${x} y${y}`)[0].classList.remove("snake", "normal", "start", "item");
 			}
 		}
+	}
 
+	loadItem() {
 		for (let i = 0; i < game.items.length; i++) {
 			const element = game.items[i];
 			document.getElementsByClassName(`x${element.x} y${element.y}`)[0].classList.add("item");
 		}
+	}
 
+	loadSnake() {
 		for (let i = 0; i < game.snake.parts.length; i++) {
 			const element = game.snake.parts[i];
 
 			for (let v = 0; v < game.snake.parts.length; v++) {
-				const element2 = game.snake.parts[v];
 
+				const element2 = game.snake.parts[v];
 				if (element.x == element2.x && element.y == element2.y && i != v) {
-					console.log(game.snake.parts, i, v);
 					game.running = false;
 				}
 			}
@@ -86,20 +114,10 @@ class Game {
 				game.createItem();
 			}
 		}
-
-		if (game.updateInterval == undefined || game.movementInterval == undefined) {
-			game.updateInterval = setInterval(game.updateSnake, 5)
-			game.movementInterval = setInterval(game.snake.move, speed)
-		} else if (game.running == false) {
-			clearInterval(game.updateInterval);
-			clearInterval(game.movementInterval);
-		}
-
-		if (!(game.running)) game.gameOver();
 	}
 
 	checkIfOutside(int) {
-		if (int < 0 || int >= worldSize) {
+		if (int < 0 || int >= game.worldSize) {
 			return true;
 		} else {
 			return false;
@@ -111,7 +129,9 @@ class Game {
 	}
 
 	gameOver() {
-		alert("Game over");
+		document.getElementById("gamestatus").innerHTML = "Game over";
+		clearInterval(game.updateInterval);
+		clearInterval(game.movementInterval);
 		if (this.score > 0) {
 			let data = { "highscore": this.score };
 			this.sendData(data);
@@ -119,14 +139,16 @@ class Game {
 	}
 
 	pauseGame() {
+		if (!game.running) return;
 		this.isPaused = !this.isPaused;
-		console.log(this.isPaused)
 		if (this.isPaused) {
+			document.getElementById("gamestatus").innerHTML = "Paused";
 			clearInterval(game.updateInterval);
 			clearInterval(game.movementInterval);
 		} else {
-			game.updateInterval = setInterval(game.updateSnake, 5)
-			game.movementInterval = setInterval(game.snake.move, speed)
+			document.getElementById("gamestatus").innerHTML = "";
+			game.updateInterval = setInterval(game.updateSnake, 15)
+			game.movementInterval = setInterval(game.snake.move, game.speed)
 		}
 	}
 

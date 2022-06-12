@@ -2,6 +2,30 @@ body {
     background-color: rgb(19, 148, 34);
 }
 
+.centered {
+    left: 0;
+    line-height: 200px;
+    margin-top: -100px;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#gamestatus {
+    top: 50%;
+    font-size: 2vw;
+    z-index: 1;
+}
+
 .worldDiv {
     display: grid;
     border: solid 5px black;

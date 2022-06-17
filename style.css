@@ -1,5 +1,6 @@
 body {
-    background-color: rgb(19, 148, 34);
+    background-image: url(./other/background.jpg);
+    background-size: cover;
 }
 
 .centered {
@@ -28,18 +29,19 @@ body {
 
 .worldDiv {
     display: grid;
-    border: solid 5px black;
+    border: solid 5px #35752c;
     position: absolute;
     left: 50%;
     top: 50%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+    background-image: url(./other/grass.png);
+    background-size: cover;
 }
 
 .area {
     width: 4vh;
     height: 4vh;
-    background-color: rgb(19, 148, 34);
 }
 
 .snake {

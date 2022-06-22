@@ -13,6 +13,7 @@ class Game {
 		this.score = 0;
 		this.items = [];
 		this.createGame();
+		this.collapsible();
 	}
 
 	createGame() {
@@ -40,9 +41,9 @@ class Game {
 	restartGame() {
 		game.running = true;
 		clearInterval(game.updateInterval);
-    	clearInterval(game.movementInterval);
+		clearInterval(game.movementInterval);
 		game.updateInterval = ""; game.movementInterval = "", document.getElementById("gamestatus").innerHTML = "";
-		this.score = 0, this.items = [];
+		this.score = 0, this.items = [], document.getElementById("highscore").innerHTML = "Punkte: 0";
 		if (game.isPaused) game.pauseGame();
 		game.createSnake();
 		game.updateSnake();
@@ -154,6 +155,7 @@ class Game {
 
 	startAudio() {
 		this.audio = new Audio('./other/song.mp3');
+		this.audio.loop = true;
 		this.audio.play();
 	}
 
@@ -168,5 +170,24 @@ class Game {
 
 			$("#result").html(data);
 		});
+	}
+
+	collapsible() {
+		let coll = document.getElementsByClassName("collapsible");
+		let i;
+
+		for (i = 0; i < coll.length; i++) {
+			coll[i].addEventListener("click", function () {
+				console.log(this.nextElementSibling);
+				this.classList.toggle("active");
+				var content = this.nextElementSibling.nextElementSibling;
+
+				if (content.style.maxHeight) {
+					content.style.maxHeight = null;
+				} else {
+					content.style.maxHeight = content.scrollHeight + "px";
+				}
+			});
+		}
 	}
 }

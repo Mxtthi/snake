@@ -1,6 +1,18 @@
 body {
     background-image: url(./other/background.jpg);
     background-size: cover;
+    font-family: 'Roboto', sans-serif;
+}
+
+#result {
+    font-size: 16px;
+    position: fixed;
+    top: 10vh;
+    right: 10vw;
+}
+
+#result button {
+    text-align: center;
 }
 
 .centered {
@@ -21,9 +33,14 @@ body {
     user-select: none;
 }
 
+#highscore {
+    font-size: 4vh;
+    top: 5vh;
+}
+
 #gamestatus {
     top: 50%;
-    font-size: 2vw;
+    font-size: 4vw;
     z-index: 1;
 }
 
@@ -59,4 +76,45 @@ body {
 .item {
     background-image: url(./other/item.png);
     background-size: cover;
+}
+
+/* collapsible */
+
+.collapsible {
+    background-color: transparent;
+    cursor: pointer;
+    padding: 15px 0px 5px 0px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 30px;
+}
+
+.collapsible::after {
+    font-weight: bold;
+    background-color: green;
+}
+
+.content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.content div {
+    padding: 10px 18px;
+    font-size: 24px;
+}
+
+.content #collapsibleContent div {
+    margin-top: 10px;
+}
+
+#mainContainer:last-child {
+    margin-bottom: 20px;
+}
+
+.content p {
+    margin: 20px 0px;
 }

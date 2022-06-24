@@ -164,7 +164,7 @@ class Game {
 	startAudio() {
 		this.audio = new Audio('./other/song.mp3');
 		this.audio.loop = true;
-		this.audio.volume = 0.25;
+		this.audio.volume = 0;
 		this.audio.play();
 	}
 

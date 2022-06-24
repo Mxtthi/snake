@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <script src="snake.js"></script>
     <script src="game.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -21,6 +22,12 @@
         <p id="highscore" class="unselectable centered">Punkte: 0</p>
     </div>
     <p id="gamestatus" class="unselectable centered"></p>
+
+    <div id="home">
+        <a href="../../">
+            <button class="homeButton"><i class="fa fa-home"></i> Home</button>
+        </a>
+    </div>
 
     <?php
 

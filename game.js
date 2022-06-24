@@ -14,6 +14,8 @@ class Game {
 		this.items = [];
 		this.createGame();
 		this.collapsible();
+
+		this.eat = new Audio('./other/eat.mp3');
 	}
 
 	createGame() {
@@ -47,6 +49,7 @@ class Game {
 		if (game.isPaused) game.pauseGame();
 		game.createSnake();
 		game.updateSnake();
+		game.startAudio();
 	}
 
 	createSnake() {
@@ -113,6 +116,8 @@ class Game {
 				document.getElementById("highscore").innerHTML = "Punkte: " + game.score;
 				game.snake.extendSnake();
 				game.createItem();
+				let clone = game.eat.cloneNode(true);
+				clone.play();
 			}
 		}
 	}
@@ -133,6 +138,7 @@ class Game {
 		document.getElementById("gamestatus").innerHTML = "Game over";
 		clearInterval(game.updateInterval);
 		clearInterval(game.movementInterval);
+		this.pauseAudio();
 		if (this.score > 0) {
 			let data = { "highscore": this.score };
 			this.sendData(data);
@@ -146,16 +152,19 @@ class Game {
 			document.getElementById("gamestatus").innerHTML = "Paused";
 			clearInterval(game.updateInterval);
 			clearInterval(game.movementInterval);
+			this.pauseAudio();
 		} else {
 			document.getElementById("gamestatus").innerHTML = "";
 			game.updateInterval = setInterval(game.updateSnake, 15)
 			game.movementInterval = setInterval(game.snake.move, game.speed)
+			this.audio.play();
 		}
 	}
 
 	startAudio() {
 		this.audio = new Audio('./other/song.mp3');
 		this.audio.loop = true;
+		this.audio.volume = 0.25;
 		this.audio.play();
 	}
 
